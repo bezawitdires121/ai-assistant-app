@@ -7,15 +7,12 @@ const AuthContext = createContext();
 // Production: Use environment variable or hardcode production URL
 const PRODUCTION_URL = 'https://nova-ai-backend-sene.onrender.com/api';
 const BASE_URL = (() => {
-  // Try environment variable first
   if (import.meta.env.VITE_API_URL) {
     return import.meta.env.VITE_API_URL;
   }
-  // Check if running on Vercel (production)
   if (typeof window !== 'undefined' && window.location.hostname === 'nova-ai-chatbot-2026.vercel.app') {
     return PRODUCTION_URL;
   }
-  // Fallback
   return PRODUCTION_URL;
 })();
 
@@ -26,21 +23,33 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  try {
-    const stored = localStorage.getItem('nova_user');
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      if (parsed && parsed.token && parsed._id) {
-        setUser(parsed);
-      } else {
-        localStorage.removeItem('nova_user');
+    try {
+      const stored = localStorage.getItem('nova_user');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed && parsed.token && parsed._id) {
+          setUser(parsed);
+        } else {
+          localStorage.removeItem('nova_user');
+        }
       }
+    } catch {
+      localStorage.removeItem('nova_user');
     }
-  } catch {
-    localStorage.removeItem('nova_user');
-  }
-  setLoading(false);
-}, []);
+    setLoading(false);
+  }, []);
+
+  const guestLogin = () => {
+    const guestUser = {
+      _id: `guest-${Date.now()}`,
+      name: 'Guest User',
+      email: `guest-${Date.now()}@nova.local`,
+      isGuest: true,
+    };
+    setUser(guestUser);
+    localStorage.setItem('nova_user', JSON.stringify(guestUser));
+    return guestUser;
+  };
 
   const signup = async (name, email, password) => {
     const url = `${BASE_URL}/auth/signup`;
@@ -67,7 +76,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signup, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, signup, login, logout, guestLogin }}>
       {children}
     </AuthContext.Provider>
   );
