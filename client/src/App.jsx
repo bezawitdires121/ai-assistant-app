@@ -24,6 +24,14 @@ export default function App() {
   const [authPage, setAuthPage] = useState('login');
   const [showAuthModal, setShowAuthModal] = useState(false);
 
+  // Auto-login as guest if URL has ?guest=true
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('guest') === 'true' && !user && !authLoading) {
+      guestLogin();
+    }
+  }, [user, authLoading, guestLogin]);
+
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('nova_theme', theme);
