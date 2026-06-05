@@ -10,7 +10,7 @@ import { Signup } from './pages/Signup';
 import './styles/index.css';
 
 export default function App() {
-  const { user, loading: authLoading, logout } = useAuth();
+  const { user, loading: authLoading, logout, guestLogin } = useAuth();
   const {
     chats, activeChatId, messages,
     loading, error,
@@ -21,6 +21,7 @@ export default function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('nova_theme') || 'dark');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [authPage, setAuthPage] = useState('login');
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -39,19 +40,32 @@ export default function App() {
   );
 
   if (!user) {
-    return authPage === 'login'
-      ? <Login onSwitch={() => setAuthPage('signup')} />
-      : <Signup onSwitch={() => setAuthPage('login')} />;
+    return (
+      <div className="auth-container">
+        {authPage === 'login' ? (
+          <Login onSwitch={() => setAuthPage('signup')} />
+        ) : (
+          <Signup onSwitch={() => setAuthPage('login')} />
+        )}
+        
+        <div className="guest-option">
+          <button className="guest-btn" onClick={guestLogin}>
+            Continue as Guest →
+          </button>
+          <p className="guest-text">Chat instantly without account</p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className={`layout ${sidebarOpen ? 'layout--sidebar-open' : ''}`}>
       <Sidebar
         sessions={(chats || []).map((c) => ({
-  id: c._id,
-  name: c.name,
-  createdAt: c.updatedAt || c.createdAt,
-}))}
+          id: c._id,
+          name: c.name,
+          createdAt: c.updatedAt || c.createdAt,
+        }))}
         activeId={activeChatId}
         onSelect={selectChat}
         onNew={newChat}
@@ -73,6 +87,7 @@ export default function App() {
           </button>
           <span className="header__title">
             {chats.find((c) => c._id === activeChatId)?.name || 'New Chat'}
+            {user?.isGuest && <span className="guest-badge">Guest</span>}
           </span>
           {loading && (
             <div className="header__status header__status--thinking">
@@ -92,6 +107,14 @@ export default function App() {
             speaking={speaking}
           />
           {error && <div className="error-banner">⚠ {error}</div>}
+          
+          {user?.isGuest && (
+            <div className="guest-promo">
+              <p>💡 <strong>Create an account</strong> to save your chats and access them anytime!</p>
+              <button onClick={() => setShowAuthModal(true)} className="promo-btn">Sign In for Better Performance</button>
+            </div>
+          )}
+          
           <ChatInput
             onSend={send}
             disabled={loading}
@@ -101,6 +124,21 @@ export default function App() {
           />
         </main>
       </div>
+
+      {showAuthModal && (
+        <div className="modal-overlay" onClick={() => setShowAuthModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowAuthModal(false)}>✕</button>
+            <h2>Create Account for Better Experience</h2>
+            <p>Save your chat history, access from anywhere, and get personalized features.</p>
+            {authPage === 'login' ? (
+              <Login onSwitch={() => setAuthPage('signup')} />
+            ) : (
+              <Signup onSwitch={() => setAuthPage('login')} />
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
