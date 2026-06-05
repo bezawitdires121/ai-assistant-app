@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
 const AuthContext = createContext();
-const BASE_URL = import.meta.env.VITE_API_URL || https://nova-ai-backend-sene.onrender.com/api;
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://nova-ai-backend-sene.onrender.com/api';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -27,14 +27,14 @@ export const AuthProvider = ({ children }) => {
 }, []);
 
   const signup = async (name, email, password) => {
-    const { data } = await axios.post(`${BASE_URL}/api/auth/signup`, { name, email, password });
+    const { data } = await axios.post(`${BASE_URL}/auth/signup`, { name, email, password });
     setUser(data);
     localStorage.setItem('nova_user', JSON.stringify(data));
     return data;
   };
 
   const login = async (email, password) => {
-    const { data } = await axios.post(`${BASE_URL}/api/auth/login`, { email, password });
+    const { data } = await axios.post(`${BASE_URL}/auth/login`, { email, password });
     setUser(data);
     localStorage.setItem('nova_user', JSON.stringify(data));
     return data;
