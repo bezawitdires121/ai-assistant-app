@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_URL || https://nova-ai-backend-sene.onrender.com/api;
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://nova-ai-backend-sene.onrender.com/api';
 
 const getToken = () => {
   const user = localStorage.getItem('nova_user');
@@ -11,7 +11,7 @@ const authHeaders = () => ({
 });
 
 export const sendMessage = async (message, chatId) => {
-  const response = await fetch(`${BASE_URL}/api/chat`, {
+  const response = await fetch(`${BASE_URL}/chat`, {
     method: 'POST',
     headers: authHeaders(),
     body: JSON.stringify({ message, chatId }),
@@ -24,7 +24,7 @@ export const sendMessage = async (message, chatId) => {
 };
 
 export const fetchChats = async () => {
-  const response = await fetch(`${BASE_URL}/api/chat`, {
+  const response = await fetch(`${BASE_URL}/chat`, {
     headers: authHeaders(),
   });
   if (!response.ok) throw new Error('Failed to fetch chats');
@@ -32,7 +32,7 @@ export const fetchChats = async () => {
 };
 
 export const fetchChatById = async (id) => {
-  const response = await fetch(`${BASE_URL}/api/chat/${id}`, {
+  const response = await fetch(`${BASE_URL}/chat/${id}`, {
     headers: authHeaders(),
   });
   if (!response.ok) throw new Error('Failed to fetch chat');
@@ -40,7 +40,7 @@ export const fetchChatById = async (id) => {
 };
 
 export const deleteChatApi = async (id) => {
-  const response = await fetch(`${BASE_URL}/api/chat/${id}`, {
+  const response = await fetch(`${BASE_URL}/chat/${id}`, {
     method: 'DELETE',
     headers: authHeaders(),
   });
