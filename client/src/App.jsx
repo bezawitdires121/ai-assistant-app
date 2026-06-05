@@ -8,6 +8,7 @@ import { Sidebar } from './components/Sidebar';
 import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
 import './styles/index.css';
+import './styles/guest-mode.css';
 
 export default function App() {
   const { user, loading: authLoading, logout, guestLogin } = useAuth();
