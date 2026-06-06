@@ -1,0 +1,76 @@
+{
+  "users": [
+    {
+      "_id": "11b05c9f-06b9-49e0-a829-9e1b3d8e7e4f",
+      "name": "Bezawit",
+      "email": "bezawitdires121@gmail.com",
+      "password": "$2b$12$k0/Gl7ns17U66eOzHYgv3OQvQonHtYfOG0qa8nOXNecclfpd7L0d6",
+      "createdAt": "2026-06-05T16:06:39.529Z"
+    }
+  ],
+  "chats": [
+    {
+      "_id": "4cad8e97-5089-4d2e-8ca8-93428631e7d0",
+      "userId": "11b05c9f-06b9-49e0-a829-9e1b3d8e7e4f",
+      "name": "New Conversation",
+      "messages": [
+        {
+          "_id": "3756a786-e6cf-40c7-b3a9-860a5594ebde",
+          "role": "user",
+          "content": "test",
+          "timestamp": "2026-06-05T16:53:19.108Z"
+        },
+        {
+          "_id": "bbf00bc3-ef7d-457e-8787-b284b476ad5e",
+          "role": "assistant",
+          "content": "Test received. How can I assist you today?",
+          "timestamp": "2026-06-05T16:53:19.108Z"
+        }
+      ],
+      "createdAt": "2026-06-05T16:53:13.192Z",
+      "updatedAt": "2026-06-05T16:53:19.108Z"
+    },
+    {
+      "_id": "742d4b46-0d8c-4e8c-afa8-c44f78c3fa2e",
+      "userId": "11b05c9f-06b9-49e0-a829-9e1b3d8e7e4f",
+      "name": "Greeting",
+      "messages": [
+        {
+          "_id": "081caeda-bc7e-4b46-85f8-c7a7268211f3",
+          "role": "user",
+          "content": "hey",
+          "timestamp": "2026-06-05T16:58:28.594Z"
+        },
+        {
+          "_id": "b0126427-5447-4096-b2f3-bc587dc3f06a",
+          "role": "assistant",
+          "content": "Hello! How can I assist you today?",
+          "timestamp": "2026-06-05T16:58:28.594Z"
+        }
+      ],
+      "createdAt": "2026-06-05T16:58:21.157Z",
+      "updatedAt": "2026-06-05T16:58:28.594Z"
+    },
+    {
+      "_id": "ba84fc2d-e0b5-466a-be50-239cb9ddb8fc",
+      "userId": "11b05c9f-06b9-49e0-a829-9e1b3d8e7e4f",
+      "name": "Greeting",
+      "messages": [
+        {
+          "_id": "8b0ffa60-ba62-47aa-b6f6-a50a64b0d1d0",
+          "role": "user",
+          "content": "hey",
+          "timestamp": "2026-06-05T17:01:36.830Z"
+        },
+        {
+          "_id": "5b69e0fa-1528-43d5-85b5-086d8a31e9b8",
+          "role": "assistant",
+          "content": "Hey! How can I assist you today?",
+          "timestamp": "2026-06-05T17:01:36.830Z"
+        }
+      ],
+      "createdAt": "2026-06-05T17:01:33.872Z",
+      "updatedAt": "2026-06-05T17:01:36.830Z"
+    }
+  ]
+}
