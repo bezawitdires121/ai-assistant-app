@@ -1,16 +1,4 @@
-// Production: Use environment variable or hardcode production URL
-const PRODUCTION_URL = 'https://nova-ai-backend-sene.onrender.com/api';
-const BASE_URL = (() => {
-  if (import.meta.env.VITE_API_URL) {
-    return import.meta.env.VITE_API_URL;
-  }
-  if (typeof window !== 'undefined' && window.location.hostname === 'nova-ai-chatbot-2026.vercel.app') {
-    return PRODUCTION_URL;
-  }
-  return PRODUCTION_URL;
-})();
-
-console.log('[API] Using BASE_URL:', BASE_URL);
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://nova-ai-backend-sene.onrender.com/api';
 
 const getToken = () => {
   const user = localStorage.getItem('nova_user');
@@ -23,9 +11,7 @@ const authHeaders = () => ({
 });
 
 export const sendMessage = async (message, chatId) => {
-  const url = `${BASE_URL}/chat`;
-  console.log('[CHAT] Send message to:', url);
-  const response = await fetch(url, {
+  const response = await fetch(`${BASE_URL}/api/chat`, {
     method: 'POST',
     headers: authHeaders(),
     body: JSON.stringify({ message, chatId }),
@@ -38,9 +24,7 @@ export const sendMessage = async (message, chatId) => {
 };
 
 export const fetchChats = async () => {
-  const url = `${BASE_URL}/chat`;
-  console.log('[CHAT] Fetch chats from:', url);
-  const response = await fetch(url, {
+  const response = await fetch(`${BASE_URL}/api/chat`, {
     headers: authHeaders(),
   });
   if (!response.ok) throw new Error('Failed to fetch chats');
@@ -48,9 +32,7 @@ export const fetchChats = async () => {
 };
 
 export const fetchChatById = async (id) => {
-  const url = `${BASE_URL}/chat/${id}`;
-  console.log('[CHAT] Fetch chat by id from:', url);
-  const response = await fetch(url, {
+  const response = await fetch(`${BASE_URL}/api/chat/${id}`, {
     headers: authHeaders(),
   });
   if (!response.ok) throw new Error('Failed to fetch chat');
@@ -58,9 +40,7 @@ export const fetchChatById = async (id) => {
 };
 
 export const deleteChatApi = async (id) => {
-  const url = `${BASE_URL}/chat/${id}`;
-  console.log('[CHAT] Delete chat from:', url);
-  const response = await fetch(url, {
+  const response = await fetch(`${BASE_URL}/api/chat/${id}`, {
     method: 'DELETE',
     headers: authHeaders(),
   });
