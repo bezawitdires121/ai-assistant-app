@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const BASE_URL = import.meta.env.VITE_API_URL || https://nova-ai-backend-sene.onrender.com/api;
 
 const getToken = () => {
   const user = localStorage.getItem('nova_user');

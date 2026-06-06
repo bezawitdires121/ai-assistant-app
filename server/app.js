@@ -7,7 +7,7 @@ import { errorHandler } from './middleware/errorHandler.js';
 const app = express();
 
 app.use(cors({
-  origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173',
+  origin: process.env.CLIENT_ORIGIN || 'https://nova-ai-chatbot-2026.vercel.app',
   methods: ['GET', 'POST', 'DELETE', 'PUT'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));

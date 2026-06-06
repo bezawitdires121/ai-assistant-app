@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
   res.send("AI Assistant Server is running 🚀");
 });
 
-const PORT = 5000;
+const PORT = https://nova-ai-backend-sene.onrender.com/api;
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
