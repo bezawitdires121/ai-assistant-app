@@ -39,18 +39,6 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const guestLogin = () => {
-    const guestUser = {
-      _id: `guest-${Date.now()}`,
-      name: 'Guest User',
-      email: `guest-${Date.now()}@nova.local`,
-      isGuest: true,
-    };
-    setUser(guestUser);
-    localStorage.setItem('nova_user', JSON.stringify(guestUser));
-    return guestUser;
-  };
-
   const signup = async (name, email, password) => {
     const url = `${BASE_URL}/auth/signup`;
     console.log('[AUTH] Signup request to:', url);
@@ -76,7 +64,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signup, login, logout, guestLogin }}>
+    <AuthContext.Provider value={{ user, loading, signup, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
