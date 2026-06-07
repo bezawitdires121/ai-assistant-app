@@ -3,7 +3,7 @@
 A production-grade AI assistant web application built with React, Node.js, and Express.
 
 ## Live Demo
-🔗 [https://ai-assistant-app-ecru.vercel.app](https://ai-assistant-app-ecru.vercel.app)
+🔗 [nova-ai-chatbot2026.vercel.app](https://nova-ai-chatbot2026.vercel.app)
 
 ## Features
 - Real AI responses powered by OpenRouter
@@ -20,5 +20,4 @@ A production-grade AI assistant web application built with React, Node.js, and E
 - Database: JSON file database (lowdb)
 - AI: OpenRouter API
 
-## Built By
-Bezawit
+
