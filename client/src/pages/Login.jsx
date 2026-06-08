@@ -53,7 +53,7 @@ export const Login = ({ onSwitch }) => {
       <div className="auth-right">
         <div className="auth-card">
           <div className="auth-card__header">
-            <h1>Welcome back</h1>
+            <h1>Welcome!</h1>
             <p>Sign in to continue to Nova AI</p>
           </div>
 
